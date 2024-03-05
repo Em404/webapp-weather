@@ -6,8 +6,8 @@ const apiKey = "&appid=1133f48a2224dd93bd0fb8aa7e71bd09";
 // per avere il meteo di 5 giorni diviso in 3 ore
 // const API_REQUEST_URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast"; lat e lon metric
 
-const API_REQUEST_URL = "https://api.openweathermap.org/";
-const API_REQUEST_URL_CORS = "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/";
+const API_REQUEST_URL = "http://api.openweathermap.org/";
+const API_REQUEST_URL_CORS = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/";
 
 const metric = "&units=metric";
 const limit = "&limit=5";
