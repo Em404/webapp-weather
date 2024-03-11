@@ -14,7 +14,7 @@ const limit = "&limit=5";
 
 export const doFetch = async (url, method, body) => {
   
-  const URL = API_REQUEST_URL_CORS + url + limit + apiKey;
+  const URL = API_REQUEST_URL + url + limit + apiKey;
 
   const options = {
     method: method,
