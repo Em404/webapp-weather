@@ -14,19 +14,6 @@ function App() {
   const [weatherMatrix, setWeatherMatrix] = useState([]);
 
   useEffect(() => {
-    const searchInitialCity = async () => {
-      try {
-        const initialCityData = await doFetch(`geo/1.0/direct?q=latina`, "GET");
-        setData(initialCityData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    // Esegui la ricerca iniziale all'avvio dell'app
-    searchInitialCity();
-  }, []);  // L'array vuoto indica che questo effetto deve essere eseguito solo una volta all'avvio
-
-  useEffect(() => {
     async function getData() {
       try {
         const weatherData = await doFetch(`data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&units=metric`, "GET");
