@@ -40,6 +40,7 @@ function App() {
   const search = async () => {
     try {
       const cityData = await doFetch(`geo/1.0/direct?q=${searchValue}`, "GET");
+      // const cityData = await doFetch(`data/2.5/weather?q=${searchValue}`, "GET");
       setData(cityData);
       setSearchValue("");
     } catch (error) {

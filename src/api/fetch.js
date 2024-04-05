@@ -7,14 +7,14 @@ const apiKey = "&appid=1133f48a2224dd93bd0fb8aa7e71bd09";
 // const API_REQUEST_URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast"; lat e lon metric
 
 const API_REQUEST_URL = "https://api.openweathermap.org/";
-const API_REQUEST_URL_CORS = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/";
+const API_REQUEST_URL_CORS = "https://corsproxy.io/?https://api.openweathermap.org/";
 
 const metric = "&units=metric";
 const limit = "&limit=5";
 
 export const doFetch = async (url, method, body) => {
   
-  const URL = API_REQUEST_URL + url + limit + apiKey;
+  const URL = API_REQUEST_URL_CORS + url + limit + apiKey;
 
   const options = {
     method: method,

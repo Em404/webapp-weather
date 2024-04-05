@@ -7,7 +7,7 @@ function SearchBar({searchValue, setSearchValue, handleKeyDown, search}) {
       <input
         type="text"
         placeholder="Cerca una località"
-        className="rounded-xl bg-transparent placeholder:text-white outline-none"
+        className="rounded-xl bg-transparent placeholder:text-white outline-none w-full"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         onKeyDown={handleKeyDown}

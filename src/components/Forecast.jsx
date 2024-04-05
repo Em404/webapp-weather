@@ -22,11 +22,11 @@ function Forecast({ weatherMatrix }) {
                 {day.map((hour) => (
                   <div key={hour.dt} className="grid grid-cols-3 items-center place-items-center lg:place-items-start lg:items-center">
                     <div className="grid grid-cols-1 md:grid-cols-2">
-                      <p className="text-xs md:text-base">{formatDate(hour?.dt_txt.split(" ")[0])}</p>
-                      <p className="text-xs md:text-base md:ms-4">{hour?.dt_txt.split(" ")[1].split(":").slice(0, 2).join(":")}</p>
+                      <p className="text-xs md:text-base lg:text-xl">{formatDate(hour?.dt_txt.split(" ")[0])}</p>
+                      <p className="text-xs md:text-base lg:text-xl md:ms-4">{hour?.dt_txt.split(" ")[1].split(":").slice(0, 2).join(":")}</p>
                     </div>
                     <p className="font-semibold text-lg lg:text-4xl justify-self-center">{Math.ceil(hour?.main.temp)}°</p>
-                    <img src={`https://openweathermap.org/img/wn/${hour?.weather[0].icon}@2x.png`} alt="" className="justify-self-center" />
+                    <img src={`http://openweathermap.org/img/wn/${hour?.weather[0].icon}@2x.png`} alt="" className="justify-self-center" />
                   </div>
                 ))}
               </div>
