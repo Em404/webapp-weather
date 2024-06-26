@@ -3,7 +3,7 @@ import React from "react";
 function CurrentWeather({ weatherData }) {
   return (
     <div>
-      <div className="rounded-xl backdrop-blur-lg bg-[#072435]/40 text-white py-4 md:px-2 border-2">
+      <div className="glass text-white py-4 md:px-2">
         <div className="px-5 current-container">
           <div className="grid grid-cols-1 items-center">
             <p className="font-bold text-xl md:text-4xl lg:text-xl xl:text-3xl text-center lg:text-left">
@@ -22,7 +22,7 @@ function CurrentWeather({ weatherData }) {
           </div>
         </div>
       </div>
-      <div className="rounded-xl backdrop-blur-lg bg-[#072435]/40 text-white py-8 md:px-2 border-2 mt-4 lg:mt-10">
+      <div className="glass text-white py-8 md:px-2 mt-4">
         <div className="px-5 current-container">
           <div className="md:py-4">
             <p className="font-semibold xl:text-xl text-center lg:text-left">

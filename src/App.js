@@ -6,48 +6,77 @@ import SearchBar from "./components/SearchBar";
 import CurrentWeather from "./components/CurrentWeather";
 import DailyWeather from "./components/DailyWeather";
 import Forecast from "./components/Forecast";
+import Header from "./components/Header";
 
 function App() {
-  const [data, setData] = useState();
-  const [searchValue, setSearchValue] = useState("");
-  const [weatherData, setWeatherData] = useState();
-  const [weatherMatrix, setWeatherMatrix] = useState([]);
+  // dichiarazione variabili di stato
+  const [data, setData] = useState(); // dati della città
+  const [searchValue, setSearchValue] = useState(); // valore della query di ricerca
+  const [weatherData, setWeatherData] = useState(); // dati meteo della città
+  const [weatherMatrix, setWeatherMatrix] = useState([]); // dati meteo suddivisi per giorni
 
+  // funzione asincrona che ottiene i dati della città in base al nome e salva i dati in "data"
+  const getData = async (cityName) => {
+    try {
+      const cityData = await doFetch(`geo/1.0/direct?q=${cityName}`, "GET");
+      setData(cityData);
+    } catch (error) {
+      console.error("Errore durante la ricerca della città:", error);
+    }
+  };
+
+  // All'avvio dell'app, recupera i dati per la città di Roma
+  // [] vuoto esegue lo useEffect solo all'avvio del componente 
   useEffect(() => {
-    async function getData() {
+    getData("Rome");
+  }, []);
+
+  // viene eseguito ogni volta che cambia "data"
+  // recupera i dati utilizzando le coordinate ottenute dallo stato "data"
+  useEffect(() => {
+    async function getWeatherData() {
       try {
-        const weatherData = await doFetch(`data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&units=metric`, "GET");
-        setWeatherData(weatherData);
+        if (data && data.length > 0) {
+          const weatherData = await doFetch(
+            `data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&units=metric`,
+            "GET"
+          );
+          console.log('weatherdata', weatherData);
+          setWeatherData(weatherData);
 
-        const weatherMatrix = [];
-        for (let i = 0; i < 6; i++) {
-          const date = new Date();
+          const weatherMatrix = [];
+          for (let i = 0; i < 6; i++) {
+            const date = new Date();
 
-          // add a day
-          date.setDate(date.getDate() + i);
+            date.setDate(date.getDate() + i);
 
-          weatherMatrix.push(weatherData?.list.filter((li) => li.dt_txt.split(" ")[0] === date.toLocaleDateString("en-CA")));
+            weatherMatrix.push(
+              weatherData?.list.filter(
+                (li) => li.dt_txt.split(" ")[0] === date.toLocaleDateString("en-CA")
+              )
+            );
+          }
+          console.log('weathermatrix', weatherMatrix)
+          setWeatherMatrix(weatherMatrix);
         }
-        setWeatherMatrix(weatherMatrix);
-        console.log(weatherMatrix);
       } catch (error) {
-        console.error(error);
+        console.error("Errore durante il recupero dei dati meteorologici:", error);
       }
     }
-    if (data) getData();
+
+    getWeatherData();
   }, [data]);
 
+  // funzione che chiama getData con la query di ricerca
   const search = async () => {
     try {
-      const cityData = await doFetch(`geo/1.0/direct?q=${searchValue}`, "GET");
-      // const cityData = await doFetch(`data/2.5/weather?q=${searchValue}`, "GET");
-      setData(cityData);
-      setSearchValue("");
+      await getData(searchValue);
     } catch (error) {
       console.error(error);
     }
   };
 
+  // funzione che gestisce l'evento di pressione del tasto enter e chiama la funzione search
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       search();
@@ -55,9 +84,9 @@ function App() {
   };
 
   return (
-    // <div className="bg-[#1f2020]">
-    <div className="bg-gradient-to-r from-[#D75DE9] to-[#3FAEB8]">
+    <div className="bg-gradient-to-r from-[#f8007d] to-[#4DE3FC] min-h-screen">
       <div className="container mx-auto py-8 px-8 md:px-32">
+        <Header />
         {/* Ricerca */}
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} search={search} handleKeyDown={handleKeyDown}/>
         <div className="grid lg:grid-cols-12 lg:grid-rows-8 gap-4 mt-4 xl:mt-6">

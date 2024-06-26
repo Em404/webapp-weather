@@ -3,7 +3,7 @@ import React from "react";
 function DailyWeather({ weatherMatrix }) {
   return (
     <div className="h-full">
-      <div className="rounded-xl backdrop-blur-lg bg-[#072435]/40 text-white py-4 md:px-2 border-2 h-full">
+      <div className="glass text-white py-4 md:px-2 h-full">
         <div className="px-5">
           <p className="font-bold text-lg pb-4 text-center lg:text-start">Previsione Oraria</p>
           <div className="flex overflow-x-auto daily-container"> 
